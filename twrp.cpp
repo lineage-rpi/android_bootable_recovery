@@ -124,6 +124,9 @@ int main(int argc, char **argv) {
 	std::string fstab_filename = "/etc/twrp.fstab";
 	if (!TWFunc::Path_Exists(fstab_filename)) {
 		fstab_filename = "/etc/recovery.fstab";
+		if (!TWFunc::Path_Exists("/dev/block/mmcblk0")) {
+			fstab_filename = "/etc/recovery.usb.fstab";
+		}
 	}
 
 	// Begin SAR detection
