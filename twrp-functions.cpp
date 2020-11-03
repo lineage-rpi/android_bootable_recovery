@@ -651,6 +651,8 @@ int TWFunc::tw_reboot(RebootCommand command)
 			Update_Intent_File("s");
 			sync();
 			check_and_run_script("/sbin/rebootsystem.sh", "reboot system");
+			check_and_run_script("/sbin/rpi-recovery.sh", "reboot rpi");
+			sleep(2);
 #ifdef ANDROID_RB_PROPERTY
 			return property_set(ANDROID_RB_PROPERTY, "reboot,");
 #elif defined(ANDROID_RB_RESTART)
