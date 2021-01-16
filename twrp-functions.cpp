@@ -676,6 +676,8 @@ int TWFunc::tw_reboot(RebootCommand command)
 #endif
 		case rb_poweroff:
 			check_and_run_script("/sbin/poweroff.sh", "power off");
+			check_and_run_script("/sbin/rpi-recovery.sh", "reboot rpi");
+			sleep(2);
 #ifdef ANDROID_RB_PROPERTY
 			return property_set(ANDROID_RB_PROPERTY, "shutdown,");
 #elif defined(ANDROID_RB_POWEROFF)
