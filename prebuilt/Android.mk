@@ -30,9 +30,6 @@ else
         ifeq ($(shell test $(PLATFORM_SDK_VERSION) -gt 23; echo $$?),0)
             RELINK_SOURCE_FILES += $(TARGET_RECOVERY_ROOT_OUT)/sbin/dd
         endif
-        ifneq ($(wildcard external/zip/Android.mk),)
-            RELINK_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/zip
-        endif
         ifneq ($(wildcard external/unzip/Android.mk),)
             RELINK_SOURCE_FILES += $(TARGET_OUT_OPTIONAL_EXECUTABLES)/unzip
         endif
@@ -571,16 +568,16 @@ ifneq ($(TW_EXCLUDE_TWRPAPP),true)
 	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
 	LOCAL_SRC_FILES := $(LOCAL_MODULE)
 	include $(BUILD_PREBUILT)
-endif
 
-#TWRP App permissions for Android 9+
-include $(CLEAR_VARS)
-LOCAL_MODULE := privapp-permissions-twrpapp.xml
-LOCAL_MODULE_TAGS := eng
-LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
-LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-include $(BUILD_PREBUILT)
+	#TWRP App permissions for Android 9+
+	include $(CLEAR_VARS)
+	LOCAL_MODULE := privapp-permissions-twrpapp.xml
+	LOCAL_MODULE_TAGS := eng
+	LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+	LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
+	LOCAL_SRC_FILES := $(LOCAL_MODULE)
+	include $(BUILD_PREBUILT)
+endif
 
 ifeq ($(TW_INCLUDE_CRYPTO), true)
     ifneq ($(TW_CRYPTO_USE_SYSTEM_VOLD),)
